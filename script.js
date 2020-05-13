@@ -1,7 +1,15 @@
+// Task: render ingredient list to page
+
 const APP_ID = '49d151e7';
 const APP_KEY = '486f3eee1c89b97dbc72958c49f4fe6a';
 let userInput = '';
 const form = document.querySelector('form');
+
+const printIngredients = (array) => {
+    document.getElementById('ingredients').innerHTML = array.map((ingredient) => {
+        return `<li>${ingredient.text}</li>`
+    })
+}
 
 const printRecipes = (array) => {
     document.getElementById('recipes').innerHTML = array.map((recipe, index, array) => {
@@ -10,6 +18,9 @@ const printRecipes = (array) => {
                     <h2>${recipe.recipe.label}</h2>
                     <img src=${recipe.recipe.image} alt=${recipe.recipe.label}/>
                     <p>Calorie count: ${Math.ceil(recipe.recipe.calories)}</p>
+                    <ul class="ingredients" id="ingredients">
+                        ${printIngredients(recipe.recipe.ingredients)}
+                    </ul>
                     <a href=${recipe.recipe.url} target="_blank">Recipe here</a>
                 </div>
                 `
@@ -41,5 +52,5 @@ document.querySelector('form').addEventListener('submit', (e) => {
         console.log('Something went wrong.' + error)
     });
 
-})
+});
 

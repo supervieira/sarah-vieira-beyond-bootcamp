@@ -4,6 +4,7 @@ const APP_KEY = '486f3eee1c89b97dbc72958c49f4fe6a';
 let userInput = '';
 const form = document.querySelector('form');
 const myIngredients = [];
+let recipeDetails = [];
 
 
 // Functions
@@ -14,40 +15,48 @@ const printIngredients = (array) => {
 }
 
 const printRecipes = (array) => {
-    
     const printedArray = array.map((recipe, index, array) => {
         return `
                 <li class="recipe" id="recipe">
                     <img src=${recipe.recipe.image} alt=${recipe.recipe.label}/>
 
-                    <a class="recipe-details wrapper" target="_blank">
+                    <a class="recipe-details wrapper" target="_blank" id=${index}>
                         <h2>${recipe.recipe.label}</h2>
                         <p>Calorie count: ${Math.ceil(recipe.recipe.calories)}</p>
                     </a>
                 </li>
-
-                <div class="recipe-popup">
-                    <div class="recipe-content-container">
-                        <h2>${recipe.recipe.label}</h2>
-                        <p>Calorie count: ${Math.ceil(recipe.recipe.calories)}</p>
-                    </div>
-
-                    <div class="recipe-image-container">
-                        <img src=${recipe.recipe.image} alt=${recipe.recipe.label}/>
-                        <a class="recipe-details wrapper" href=${recipe.recipe.url} target="_blank">Click here for recipe</a>
-                    </div>
-                </div>
                 `
     })
 
     const printedContent = printedArray.join(' ');
     document.getElementById('recipes').innerHTML = printedContent;
+
+    createRecipeDetailsArray(array);
 }
 
-const printRecipePopup = () => {
-    console.log('print recipe');
-    console.log(this);
-    document.getElementsByClassName('recipe-popup').classList.add('show');
+const createRecipeDetailsArray = (array) => {
+    array.forEach((item, index, array) => {
+        recipeDetails.push(item);
+    });
+}
+
+const printRecipePopup = (recipeID) => {
+    const recipe = recipeDetails[recipeID];
+    console.log(recipe);
+
+    const printedHTML = `
+        <div class="recipe-content-container">
+            <h2>${recipe.recipe.label}</h2>
+            <p>Calorie count: ${Math.ceil(recipe.recipe.calories)}</p>
+        </div>
+
+        <div class="recipe-image-container">
+            <img src=${recipe.recipe.image} alt=${recipe.recipe.label} />
+            <a class="recipe-details wrapper" href=${recipe.recipe.url} target="_blank">Click here for recipe</a>
+        </div>
+    `
+
+    document.getElementById('recipe-popup').innerHTML = printedHTML;
 }
 
 
@@ -77,12 +86,6 @@ document.querySelector('form').addEventListener('submit', (e) => {
         
         console.log('Success!', data.hits);
         printRecipes(data.hits);
-
-        document.getElementById('recipe').addEventListener('click', (e) => {
-            console.log(this);
-            console.log(e);
-            printRecipePopup();
-        })
     })
     
     .catch((error) => {
@@ -91,7 +94,10 @@ document.querySelector('form').addEventListener('submit', (e) => {
     });
 });
 
-document.querySelector('recipe').addEventListener('click', (e) => {
+document.querySelector('.recipes').addEventListener('click', (e) => {
     console.log('clicked recipe');
-})
+    console.log(e.target.id);
 
+    const selectedRecipeID = e.target.id;
+    printRecipePopup(selectedRecipeID);
+})

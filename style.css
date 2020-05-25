@@ -137,7 +137,7 @@ main{
   height: 80vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  display: none;
+  /* display: none; */
 }
 
 .recipe-content-container{

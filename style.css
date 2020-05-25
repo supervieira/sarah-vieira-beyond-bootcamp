@@ -70,6 +70,7 @@ header button:hover{
 /* Main styling */
 main{
   min-height: 100vh;
+  padding: 2vmax 0;
 }
 
 .search-form{
@@ -146,6 +147,18 @@ main{
 .show{
   display: block;
 }
+
+/* Footer styling */
+
+footer {
+ background: lightcoral;
+ color: white;
+ text-align: center;
+ padding: 20px 0;
+ font-weight: bold;
+}
+
+
 
 
 

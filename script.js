@@ -1,3 +1,8 @@
+// Add display none to recipe popup and add class of 'show' on click
+// Add 'x' button to popup window
+// Add click event to 'x' button and out of focus area that will close popup
+// Figure out side scroll in image container of popup
+
 // Variables 
 const APP_ID = '49d151e7';
 const APP_KEY = '486f3eee1c89b97dbc72958c49f4fe6a';
@@ -48,6 +53,8 @@ const printRecipePopup = (recipeID) => {
         <div class="recipe-content-container">
             <h2>${recipe.recipe.label}</h2>
             <p>Calorie count: ${Math.ceil(recipe.recipe.calories)}</p>
+            <ul id='ingredient-${recipeID}'>
+            </ul>
         </div>
 
         <div class="recipe-image-container">
@@ -57,6 +64,20 @@ const printRecipePopup = (recipeID) => {
     `
 
     document.getElementById('recipe-popup').innerHTML = printedHTML;
+    printIngredientList(recipeID);
+
+}
+
+const printIngredientList = (recipeID) => {
+    let recipeIngredients = recipeDetails[recipeID].recipe.ingredients;
+
+    recipeIngredients.forEach((item)=>{
+        console.log(item.text);
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `${item.text}`
+        document.getElementById('ingredient-'+ recipeID).append(listItem);
+    });
+
 }
 
 
@@ -97,7 +118,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
 document.querySelector('.recipes').addEventListener('click', (e) => {
     console.log('clicked recipe');
     console.log(e.target.id);
-
+    
     const selectedRecipeID = e.target.id;
     printRecipePopup(selectedRecipeID);
 })

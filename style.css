@@ -22,11 +22,11 @@ img{
 
 header{
   min-height: 100vh;
-  background-image: url(./assets/home2.jpg);
+  /* background-image: url(./assets/home2.jpg);
   background-position: fixed;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
   text-align: center;
 }
 
@@ -34,7 +34,7 @@ header{
 /* Photo by Ella Olsson on Unsplash */
 
 .header-container{
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,9 +42,14 @@ header{
 }
 
 h1{
-  font-size: 8vmax;
-  font-family: 'Playfair Display', serif;
+  font-size: 10vmax;
+  /* font-family: 'Playfair Display', serif; */
   letter-spacing: 5px;
+  margin-top: 20%;
+}
+
+h1 span{
+  color: pink;
 }
 
 header p{
@@ -61,6 +66,7 @@ header button{
   letter-spacing: 5px;
   border: none;
   margin: 3vmax auto 0;
+  border-radius: 70px;
 }
 
 header button:hover{
@@ -68,6 +74,30 @@ header button:hover{
   background: white;
 }
 
+nav{
+  margin: 30px;
+}
+
+nav ul{
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav li{
+  list-style-type: none;
+  padding-right: 30px;
+}
+
+nav li a{
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+nav a:hover{
+  color: pink;
+}
 
 /* Main styling */
 main{
@@ -80,6 +110,7 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 3vmax;
 }
 
 .search-bar{
@@ -114,8 +145,17 @@ main{
   text-decoration: none;
 }
 
+.recipe-details h2{
+  font-size: 2vmax;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 .recipe-details p{
   padding-bottom: 2vmax;
+  font-size: 1vmax;
+  color: pink;
 }
 
 .recipe:hover .recipe-details{

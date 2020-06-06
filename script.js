@@ -40,6 +40,8 @@ const printRecipes = (array) => {
 }
 
 const createRecipeDetailsArray = (array) => {
+    recipeDetails = [];
+    
     array.forEach((item, index, array) => {
         recipeDetails.push(item);
     });

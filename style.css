@@ -93,6 +93,7 @@ main{
   border: none;
   padding: 10px 20px;
   color: white;
+  cursor: pointer;
 }
 
 .recipes{
@@ -133,29 +134,63 @@ main{
 }
 
 .recipe-popup{
-  position: fixed;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  z-index: 100;
-  height: 80vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: auto;
-  /* display: none; */
+  display: none;
 }
 
 .recipe-content-container{
   background: white;
+  padding: 4vmax;
 }
 
-.recipe-image-container{
+.recipe-content-container li{
+  list-style-position: inside;
+}
+
+.recipe-image-container img{
   height: 100%;
   width: auto;
 }
 
+.exit-popup{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.exit-popup i{
+  font-size: 30px;
+  color: white;
+  z-index: 1000;
+}
+
 .show{
   display: block;
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  font-size: 12px;
+  width: 80%;
+  z-index: 100;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  overflow: auto;
+}
+
+.small-details-container{
+  display: flex;
+}
+
+.small-details-container p{
+  padding: 10px;
+  border: 1px solid red;
+}
+
+
+.recipe-details,
+.recipe-details-content,
+#exit-popup{
+  cursor: pointer;
 }
 
 /* Footer styling */

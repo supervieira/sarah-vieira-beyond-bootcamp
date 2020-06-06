@@ -25,10 +25,10 @@ const printRecipes = (array) => {
                 <li class="recipe" id="recipe">
                     <img src=${recipe.recipe.image} alt=${recipe.recipe.label}/>
 
-                    <a class="recipe-details wrapper" target="_blank" id=${index}>
-                        <h2>${recipe.recipe.label}</h2>
-                        <p>Calorie count: ${Math.ceil(recipe.recipe.calories)}</p>
-                    </a>
+                    <div class="${index} recipe-details wrapper" id=${index}>
+                        <h2 class="${index} recipe-details-content">${recipe.recipe.label}</h2>
+                        <p class="${index} recipe-details-content">Calorie count: ${Math.ceil(recipe.recipe.calories)}</p>
+                    </div>
                 </li>
                 `
     })
@@ -45,34 +45,54 @@ const createRecipeDetailsArray = (array) => {
     });
 }
 
-const printRecipePopup = (recipeID) => {
+const printRecipePopup = (recipeID) => {    
     const recipe = recipeDetails[recipeID];
-    console.log(recipe);
 
     const printedHTML = `
         <div class="recipe-content-container">
+            <p>Recipe for:</p>
             <h2>${recipe.recipe.label}</h2>
-            <p>Calorie count: ${Math.ceil(recipe.recipe.calories)}</p>
-            <ul id='ingredient-${recipeID}'>
-            </ul>
+
+            <div class="small-details-container">
+                <p>From: ${recipe.recipe.source}</p>
+                <p>Ready in: ${recipe.recipe.totalTime} minutes</p>
+                <p>${Math.ceil(recipe.recipe.calories)} cals</p>
+            </div>
+
+            <div class="ingredients-container">
+                <h3>Ingredients:</h3>
+                <ul id='ingredient-${recipeID}'></ul>
+            </div>
+
+            <div class="recipe-buttons">
+                <button>
+                    <a class="recipe-link wrapper" href=${recipe.recipe.url} target="_blank">
+                        View Full Recipe
+                    </a>
+                </button>
+                <button>Save</button>
+            </div>
         </div>
 
         <div class="recipe-image-container">
             <img src=${recipe.recipe.image} alt=${recipe.recipe.label} />
-            <a class="recipe-details wrapper" href=${recipe.recipe.url} target="_blank">Click here for recipe</a>
+        </div>
+
+        <div class="exit-popup">
+            <i class="fas fa-times-circle exit" id="exit-popup"></i>
         </div>
     `
 
     document.getElementById('recipe-popup').innerHTML = printedHTML;
-    printIngredientList(recipeID);
 
+    printIngredientList(recipeID);
+    document.getElementById('recipe-popup').classList.add('show');
 }
 
 const printIngredientList = (recipeID) => {
     let recipeIngredients = recipeDetails[recipeID].recipe.ingredients;
 
     recipeIngredients.forEach((item)=>{
-        console.log(item.text);
         const listItem = document.createElement('li');
         listItem.innerHTML = `${item.text}`
         document.getElementById('ingredient-'+ recipeID).append(listItem);
@@ -116,9 +136,16 @@ document.querySelector('form').addEventListener('submit', (e) => {
 });
 
 document.querySelector('.recipes').addEventListener('click', (e) => {
-    console.log('clicked recipe');
+    const selectedRecipeClass = e.target.classList[0];
+    printRecipePopup(selectedRecipeClass);
+})
+
+document.querySelector('.recipe-popup').addEventListener('click', (e) => {
+    console.log('exit clicked');
+    console.log(e.target);
     console.log(e.target.id);
-    
-    const selectedRecipeID = e.target.id;
-    printRecipePopup(selectedRecipeID);
+
+    if(e.target.id === "exit-popup"){
+        document.getElementById('recipe-popup').classList.remove('show');
+    }
 })

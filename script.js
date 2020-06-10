@@ -104,16 +104,14 @@ const printIngredientList = (recipeID) => {
 
 
 // Event listeners 
-document.querySelector('button').addEventListener('click', (e) => {
-    document.querySelector('main').scrollIntoView();
-})
-
 document.querySelector('input').addEventListener('input', (e) => {
     userInput = e.target.value;
 });
 
 document.querySelector('form').addEventListener('submit', (e) => {
     e.preventDefault();
+    
+    document.querySelector('main').scrollIntoView();
 
     fetch(`https://api.edamam.com/search?q=${userInput}&app_id=${APP_ID}&app_key=${APP_KEY}&to=12`)
     // .fetch() method returns a promise, which can be handled using .then() and .catch()

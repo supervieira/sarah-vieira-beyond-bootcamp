@@ -7,6 +7,13 @@ body,
   scroll-behavior: smooth;
 }
 
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 img{
   display: block;
   width: 100%;
@@ -20,19 +27,6 @@ img{
 
 /* Header styling */
 
-header{
-  min-height: 100vh;
-  /* background-image: url(./assets/home2.jpg);
-  background-position: fixed;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover; */
-  text-align: center;
-}
-
-/* Photo by Becca Tapert on Unsplash */
-/* Photo by Ella Olsson on Unsplash */
-
 .header-container{
   height: 100%;
   display: flex;
@@ -45,7 +39,7 @@ h1{
   font-size: 10vmax;
   /* font-family: 'Playfair Display', serif; */
   letter-spacing: 5px;
-  margin-top: 20%;
+  margin-top: 34vh;
 }
 
 h1 span{
@@ -101,7 +95,6 @@ nav a:hover{
 
 /* Main styling */
 main{
-  min-height: 100vh;
   padding: 2vmax 0;
 }
 
@@ -114,7 +107,8 @@ main{
 }
 
 .search-bar{
-  width: 50%;
+  /* width: 50%; */
+  text-align:center;
   padding: 10px;
   border: none;
 }
@@ -239,8 +233,9 @@ footer {
  background: lightcoral;
  color: white;
  text-align: center;
- padding: 20px 0;
+ padding: 12px 0;
  font-weight: bold;
+ font-size: 14px;
 }
 
 
